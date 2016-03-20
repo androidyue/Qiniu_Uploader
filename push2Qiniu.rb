@@ -23,6 +23,11 @@ def sync(dir)
             next
         end
         dir = dir + '/' if !dir.end_with? '/'
+        
+        if dir.include?("blog/categories") && fileEntry.include?("atom.xml")
+			next
+        end 
+        
         filePath = dir + fileEntry
         #puts "filePath = #{filePath}"
         if File.directory?(filePath)
