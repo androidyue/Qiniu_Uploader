@@ -113,14 +113,15 @@ def uploadFile(bucket, localPath, fileName=nil, putPolicy=nil, xVar=nil)
     end
     initQiniuAuth
     #puts 'fileName =' + fileName if $verboseOn
-    put_policy = Qiniu::Auth::PutPolicy.new(bucket + ':' + fileName ) if putPolicy.nil?
+    put_policy = Qiniu::Auth::PutPolicy.new(bucket,  fileName,  3600) if putPolicy.nil?
+    uptoken = Qiniu::Auth.generate_uptoken(put_policy)
     #puts 'uploadFile method localPath =' + localPath + ';fileName=' + fileName + ';bucket=' + bucket if $verboseOn
-    code, result, response_headers = Qiniu::Storage.upload_with_put_policy(
-            put_policy,    
-            localPath,    
-            fileName,            
-            xVar      
+    code, result, response_headers = Qiniu::Storage.upload_with_token_2(
+        uptoken, 
+        localPath,
+        fileName
     )
+
     #puts code, result, response_headers if $verboseOn
     if success = (STATUS_CODE_OK == code)
         if UPLOAD_TYPE_CREATE == uploadType 
