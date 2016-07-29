@@ -38,3 +38,10 @@ ruby push2Qiniu.rb dir_to_sync bucket
   * 新文件 直接上传
   * 已存在的文件，如果lastModified没有变化，不上传
   * 已存在的文件，如果lastModified有变化，检测文件内容md5，如果和上一次不同，则上传，否则不上传。
+
+
+## Note
+建议安装6.5.1版qiniu sdk
+```
+sudo gem install qiniu -v 6.5.1
+```
