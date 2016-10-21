@@ -45,3 +45,6 @@ ruby push2Qiniu.rb dir_to_sync bucket
 ```
 sudo gem install qiniu -v 6.5.1
 ```
+
+除此之外还需要手动安装`inifile`
+
